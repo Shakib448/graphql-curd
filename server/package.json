@@ -1,12 +1,12 @@
 {
   "name": "graphql-curd",
   "version": "1.0.0",
-  "main": "server.js",
+  "main": "index.js",
   "author": "Muktadir",
   "license": "MIT",
   "scripts": {
-    "start": "node ./dits/server.ts",
-    "dev": "nodemon ./src/server.ts",
+    "start": "node ./dits/index.ts",
+    "dev": "nodemon ./src/index.ts",
     "build": "tsc -p ."
   },
   "dependencies": {
