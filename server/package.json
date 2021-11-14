@@ -1,0 +1,7 @@
+{
+  "name": "graphql-curd",
+  "version": "1.0.0",
+  "main": "server",
+  "author": "Muktadir",
+  "license": "MIT"
+}
