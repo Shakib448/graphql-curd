@@ -1,7 +1,7 @@
 import mongoose, { Schema } from "mongoose";
 import { composeWithMongoose } from "graphql-compose-mongoose";
 
-export const Users = new Schema({
+const Users = new Schema({
   name: {
     type: String,
   },
@@ -11,5 +11,5 @@ export const Users = new Schema({
   password: { type: String },
 });
 
-export const User = mongoose.model("User", Users);
-export const UserTC = composeWithMongoose(User);
+const User = mongoose.model("User", Users);
+export default User;
