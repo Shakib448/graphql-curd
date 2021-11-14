@@ -1,6 +1,7 @@
 import express from "express";
 import { graphqlHTTP } from "express-graphql";
 import cors from "cors";
+
 import { connectDB } from "./db";
 
 const PORT = process.env.PORT || 5000;
