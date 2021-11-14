@@ -393,6 +393,11 @@ crypto-random-string@^2.0.0:
   resolved "https://registry.yarnpkg.com/crypto-random-string/-/crypto-random-string-2.0.0.tgz#ef2a7a966ec11083388369baa02ebead229b30d5"
   integrity sha512-v1plID3y9r/lPhviJ1wrXpLeyUIGAZ2SHNYTEapm7/8A9nLPoyvVp3RK/EPFqn5kEznyWgYZNsRtYYIWbuG8KA==
 
+dataloader@^2.0.0:
+  version "2.0.0"
+  resolved "https://registry.yarnpkg.com/dataloader/-/dataloader-2.0.0.tgz#41eaf123db115987e21ca93c005cd7753c55fe6f"
+  integrity sha512-YzhyDAwA4TaQIhM5go+vCLmU0UikghC/t9DTQYZR2M/UvZ1MdOhPezSDZcjj9uqQJOMqjLcpWtyW2iNINdlatQ==
+
 debug@2.6.9:
   version "2.6.9"
   resolved "https://registry.yarnpkg.com/debug/-/debug-2.6.9.tgz#5d128515df134ff327e90a4c93f4e077a536341f"
@@ -630,6 +635,25 @@ graceful-fs@^4.1.2:
   version "4.2.8"
   resolved "https://registry.yarnpkg.com/graceful-fs/-/graceful-fs-4.2.8.tgz#e412b8d33f5e006593cbd3cee6df9f2cebbe802a"
   integrity sha512-qkIilPUYcNhJpd33n0GBXTB1MMPp14TxEsEs0pTrsSVucApsYzW5V+Q8Qxhik6KU3evy+qkAAowTByymK0avdg==
+
+graphql-compose-connection@8.2.1:
+  version "8.2.1"
+  resolved "https://registry.yarnpkg.com/graphql-compose-connection/-/graphql-compose-connection-8.2.1.tgz#ca78363f4f94a209e31d9dc8905de2e26bcb8b81"
+  integrity sha512-75QOx1HusfkLzDlF+RMGoC0UowbZ2R7/xFRIMfbQf1gc6eeRqiGmTWFxHaUYk2WjTAB4dGO7p/gllfwqO0W/TA==
+
+graphql-compose-mongoose@^9.7.0:
+  version "9.7.0"
+  resolved "https://registry.yarnpkg.com/graphql-compose-mongoose/-/graphql-compose-mongoose-9.7.0.tgz#f8cc7d84ea08898a3f1bd091427a103fa37321cd"
+  integrity sha512-ID6Dk57fJryg9Tgr9RUyFhL8w81yZ/v7wm/ubbSNg4CEgPBV22Ii31tZLwWxv47eGupW4H7arZOOZOq0SgGKIg==
+  dependencies:
+    dataloader "^2.0.0"
+    graphql-compose-connection "8.2.1"
+    graphql-compose-pagination "8.3.0"
+
+graphql-compose-pagination@8.3.0:
+  version "8.3.0"
+  resolved "https://registry.yarnpkg.com/graphql-compose-pagination/-/graphql-compose-pagination-8.3.0.tgz#a58c786256b4dba1843d495ae81cb0fc67ac1369"
+  integrity sha512-zZoBhlWD9KnAJ9AUOeFNeoE4Q/zMxZaxg0tR+HFMVNFnw7ENUnIChMWnD2uvmvik+k8Yv304hMF4n81okGVsJw==
 
 graphql@^16.0.1:
   version "16.0.1"
