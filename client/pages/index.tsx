@@ -6,6 +6,7 @@ import { CREATE_USER } from "../src/Graphql/Mutation";
 import Queries from "../src/Components/Queries";
 import { GET_ALL_USERS } from "../src/Graphql/Queries";
 import { client } from "./_app";
+import UpdatePassword from "../src/Components/UpdatePassword";
 
 const Home = ({ data, dataLoading, dataError }) => {
   const [name, setName] = useState("");
@@ -55,6 +56,9 @@ const Home = ({ data, dataLoading, dataError }) => {
             submit
           </button>
         </div>
+        <br />
+        <br />
+        <UpdatePassword />
         <Queries data={data} dataLoading={dataLoading} />
       </main>
     </div>
@@ -64,7 +68,7 @@ const Home = ({ data, dataLoading, dataError }) => {
 export default Home;
 
 export async function getStaticProps() {
-  const { data, loading, error } = await client.query({
+  const { data, loading } = await client.query({
     query: GET_ALL_USERS,
   });
 
