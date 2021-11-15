@@ -1,5 +1,4 @@
 import React, { useState } from "react";
-import Head from "next/head";
 import { useMutation } from "@apollo/client";
 import { UPDATE_PASSWORD } from "../Graphql/Mutation";
 
