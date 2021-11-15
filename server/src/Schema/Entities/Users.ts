@@ -1,5 +1,4 @@
 import mongoose, { Schema } from "mongoose";
-import { composeWithMongoose } from "graphql-compose-mongoose";
 
 const Users = new Schema({
   name: {
