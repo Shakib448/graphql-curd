@@ -8,7 +8,7 @@ import { GET_ALL_USERS } from "../src/Graphql/Queries";
 import { client } from "./_app";
 import UpdatePassword from "../src/Components/UpdatePassword";
 
-const Home = ({ data, dataLoading, dataError }) => {
+const Home = ({ data, dataLoading }: any) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
