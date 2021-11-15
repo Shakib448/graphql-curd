@@ -1,7 +1,19 @@
-import type { NextPage } from "next";
+import React, { useState } from "react";
 import Head from "next/head";
+import { useMutation } from "@apollo/client";
+import Link from "next/link";
 
-const Home: NextPage = () => {
+import { CREATE_USER } from "../src/Graphql/Mutation";
+
+const Home = () => {
+  const [name, setName] = useState("");
+  const [username, setUsername] = useState("");
+  const [password, setPassword] = useState("");
+  const [createUser, { error, loading }] = useMutation(CREATE_USER);
+
+  if (loading) return "Submitting...";
+  if (error) return `Submission error! ${error.message}`;
+
   return (
     <div>
       <Head>
@@ -10,7 +22,39 @@ const Home: NextPage = () => {
         <link rel="icon" href="/favicon.ico" />
       </Head>
 
-      <main></main>
+      <main>
+        <div className="createUser">
+          <input
+            type="text"
+            placeholder="name"
+            onChange={(e) => setName(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="username"
+            onChange={(e) => setUsername(e.target.value)}
+          />
+          <input
+            type="text"
+            placeholder="password"
+            onChange={(e) => setPassword(e.target.value)}
+          />
+          <button
+            onClick={() =>
+              createUser({
+                variables: {
+                  name: name,
+                  username: username,
+                  password: password,
+                },
+              })
+            }
+          >
+            submit
+          </button>
+          <Link href="/newUser">GO</Link>
+        </div>
+      </main>
     </div>
   );
 };

@@ -7,12 +7,12 @@ import {
   NormalizedCacheObject,
 } from "@apollo/client";
 
-function MyApp({ Component, pageProps }: AppProps) {
-  const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
-    uri: "http://localhost:5000/graphql",
-    cache: new InMemoryCache(),
-  });
+export const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
+  uri: "http://localhost:5000/graphql",
+  cache: new InMemoryCache(),
+});
 
+function MyApp({ Component, pageProps }: AppProps) {
   return (
     <ApolloProvider client={client}>
       <Component {...pageProps} />
