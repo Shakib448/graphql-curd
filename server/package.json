@@ -6,8 +6,10 @@
   "license": "MIT",
   "scripts": {
     "start": "node ./dits/index.ts",
-    "dev": "nodemon ./src/index.ts",
-    "build": "tsc -p ."
+    "server": "nodemon ./src/index.ts",
+    "build": "tsc -p .",
+    "client": "npm run dev --prefix ../client",
+    "dev": "concurrently \"npm run server\" \"npm run client\""
   },
   "dependencies": {
     "@types/cors": "^2.8.12",
