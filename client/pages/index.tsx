@@ -1,11 +1,13 @@
 import React, { useState } from "react";
 import Head from "next/head";
 import { useMutation } from "@apollo/client";
-import Link from "next/link";
 
 import { CREATE_USER } from "../src/Graphql/Mutation";
+import Queries from "../src/Components/Queries";
+import { GET_ALL_USERS } from "../src/Graphql/Queries";
+import { client } from "./_app";
 
-const Home = () => {
+const Home = ({ data, dataLoading, dataError }) => {
   const [name, setName] = useState("");
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
@@ -52,11 +54,24 @@ const Home = () => {
           >
             submit
           </button>
-          <Link href="/newUser">GO</Link>
         </div>
+        <Queries data={data} dataLoading={dataLoading} />
       </main>
     </div>
   );
 };
 
 export default Home;
+
+export async function getStaticProps() {
+  const { data, loading, error } = await client.query({
+    query: GET_ALL_USERS,
+  });
+
+  return {
+    props: {
+      data: data.getAllUsers,
+      dataLoading: loading,
+    },
+  };
+}
