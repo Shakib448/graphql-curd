@@ -4,6 +4,8 @@ import { DELETE_USER } from "../Graphql/Mutation";
 const Queries = ({ data, dataLoading }: any) => {
   const [deleteUser, { error }] = useMutation(DELETE_USER);
 
+  console.log(dataLoading);
+
   if (dataLoading) return "Loading...";
   if (error) return `Have some problem with ${error}`;
 
