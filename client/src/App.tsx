@@ -1,5 +1,7 @@
-import "../styles/globals.css";
-import type { AppProps } from "next/app";
+import "./App.css";
+import User from "./Components/User";
+import UpdatePassword from "./Components/UpdatePassword";
+
 import {
   ApolloClient,
   InMemoryCache,
@@ -12,12 +14,16 @@ export const client: ApolloClient<NormalizedCacheObject> = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-function MyApp({ Component, pageProps }: AppProps) {
+function App() {
   return (
     <ApolloProvider client={client}>
-      <Component {...pageProps} />
+      <div className="App">
+        <User />
+        <br />
+        <UpdatePassword />
+      </div>
     </ApolloProvider>
   );
 }
 
-export default MyApp;
+export default App;
