@@ -1,9 +1,11 @@
 /* eslint-disable testing-library/await-async-query */
-import { render, screen, waitFor } from "@testing-library/react";
+import { fireEvent, render, screen, waitFor } from "@testing-library/react";
 import User from "../User";
 import { MockedProvider } from "@apollo/client/testing";
 import { GET_ALL_USERS } from "../../Graphql/Queries";
 import { GraphQLError } from "graphql";
+import { DELETE_USER } from "../../Graphql/Mutation";
+import userEvent from "@testing-library/user-event";
 
 describe("Testing with renders", () => {
   it("renders with loading", () => {
@@ -13,8 +15,8 @@ describe("Testing with renders", () => {
         <User />
       </MockedProvider>
     );
-    const componentText = screen.getByText(/Loading.../i);
-    expect(componentText).toBeInTheDocument();
+    const loadingText = screen.getByText(/Loading.../i);
+    expect(loadingText).toBeInTheDocument();
   });
 
   it("Should render by length users data and also data", async () => {
@@ -32,8 +34,20 @@ describe("Testing with renders", () => {
       },
     };
 
+    const deleteMockUser: any = {
+      request: {
+        query: DELETE_USER,
+      },
+      result: {
+        deleteUser: [
+          { id: 1, name: "shakib", username: "muktadir" },
+          { id: 2, name: "shakib1", username: "muktadir1" },
+        ],
+      },
+    };
+
     render(
-      <MockedProvider mocks={[mocks]} addTypename={false}>
+      <MockedProvider mocks={[mocks, deleteMockUser]} addTypename={false}>
         <User />
       </MockedProvider>
     );
@@ -46,6 +60,10 @@ describe("Testing with renders", () => {
       expect(text).toHaveLength(2);
       expect(Array.isArray(text)).toBeTruthy();
 
+      const button = screen.getByRole("button", { name: /delete/i });
+      userEvent.click(button);
+      const successDeleteMessage = screen.getByText(/Successfully delete!/i);
+      expect(successDeleteMessage).toBeInTheDocument();
       // eslint-disable-next-line testing-library/no-wait-for-snapshot
       expect(text).toMatchSnapshot();
     });
