@@ -15,6 +15,7 @@ const User = (): JSX.Element => {
   if (queryError) return <h1>Error!</h1>;
   if (mutationError) return <h1>An error has occurred!</h1>;
   if (mutationData) return <p>Successfully delete!</p>;
+
   return (
     <div>
       {data &&
