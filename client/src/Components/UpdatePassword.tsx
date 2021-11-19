@@ -6,9 +6,11 @@ const UpdatePassword = (): JSX.Element => {
   const [username, setUsername] = useState("");
   const [oldPassword, setOldPassword] = useState("");
   const [newPassword, setNewPassword] = useState("");
-  const [updatePassword, { error, loading }] = useMutation(UPDATE_PASSWORD);
+  const [updatePassword, { error, loading, data }] =
+    useMutation(UPDATE_PASSWORD);
 
   if (loading) return <h1>Submitting...</h1>;
+  if (data) return <h1>Successfully submitted!</h1>;
   if (error) return <h1>{`Submission error! ${error.message}`}</h1>;
 
   return (
