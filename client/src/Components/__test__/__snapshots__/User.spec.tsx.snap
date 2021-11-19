@@ -12,3 +12,9 @@ Array [
   </h1>,
 ]
 `;
+
+exports[`Testing with renders should delete with success message 1`] = `
+<p>
+  Successfully delete!
+</p>
+`;

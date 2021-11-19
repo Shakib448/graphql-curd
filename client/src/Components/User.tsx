@@ -5,7 +5,8 @@ import { DELETE_USER } from "../Graphql/Mutation";
 import { GET_ALL_USERS } from "../Graphql/Queries";
 
 const User = (): JSX.Element => {
-  const [deleteUser, { error: mutationError }] = useMutation(DELETE_USER);
+  const [deleteUser, { error: mutationError, data: mutationData }] =
+    useMutation(DELETE_USER);
   const { data, loading, error: queryError } = useQuery(GET_ALL_USERS);
 
   if (loading) {
@@ -13,6 +14,8 @@ const User = (): JSX.Element => {
   }
   if (queryError) return <h1>Error!</h1>;
   if (mutationError) return <h1>An error has occurred!</h1>;
+  if (mutationData) return <p>Successfully delete!</p>;
+
   return (
     <div>
       {data &&
