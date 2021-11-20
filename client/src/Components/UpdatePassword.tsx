@@ -11,7 +11,7 @@ const UpdatePassword = (): JSX.Element => {
 
   if (loading) return <h1>Submitting...</h1>;
   if (data) return <h1>Successfully submitted!</h1>;
-  if (error) return <h1>{`Submission error! ${error.message}`}</h1>;
+  if (error) return <h1>Error!</h1>;
 
   return (
     <div>

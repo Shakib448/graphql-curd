@@ -1,3 +1,4 @@
+/* eslint-disable jest/no-identical-title */
 /* eslint-disable testing-library/no-wait-for-snapshot */
 /* eslint-disable testing-library/await-async-query */
 import { render, waitFor } from "@testing-library/react";
@@ -7,55 +8,40 @@ import userEvent from "@testing-library/user-event";
 import UpdatePassword from "../UpdatePassword";
 
 describe("Testing with renders", () => {
-  it("renders with loading", () => {
-    const mocks: any[] = [];
-    const { container, getByText, getByRole } = render(
-      <MockedProvider mocks={mocks} addTypename={false}>
-        <UpdatePassword />
-      </MockedProvider>
-    );
-
-    const button = getByRole("button", { name: /update password/i });
-
-    userEvent.click(button);
-
-    const SubmittingMessage = getByText(/Submitting.../i);
-    expect(SubmittingMessage).toBeInTheDocument();
-
-    expect(container).toMatchSnapshot();
-  });
-
-  it("should delete with success message", async () => {
-    const updateMessage = { message: "Successfully Delete" };
+  it("should updated the password with success message", async () => {
+    const updatePassword = { message: "Successfully updated!" };
     const updateUser: any = {
       request: {
         query: UPDATE_PASSWORD,
         variables: {
-          username: "shakib",
-          oldPassword: "muktadir",
-          newPassword: "123456",
+          username: "",
+          oldPassword: "",
+          newPassword: "",
         },
       },
       result: {
         data: {
-          updateMessage,
+          updatePassword,
         },
       },
     };
 
-    const { container, getByRole, getByText } = render(
+    const { container, getByRole, findByText } = render(
       <MockedProvider mocks={[updateUser]} addTypename={false}>
         <UpdatePassword />
       </MockedProvider>
     );
 
-    // const button = getByRole("button", { name: /update password/i });
-    // userEvent.click(button);
+    const button = getByRole("button", { name: /update password/i });
+    userEvent.click(button);
 
-    // await waitFor(async () => {
-    //     const successSubmitMessage = getByText(/Successfully submitted!/i);
-    //     expect(successSubmitMessage).toBeInTheDocument();
-    // });
+    const SubmittingMessage = await findByText(/Submitting.../i);
+    expect(SubmittingMessage).toBeInTheDocument();
+
+    await waitFor(async () => {
+      const successSubmitMessage = await findByText(/Successfully submitted!/i);
+      expect(successSubmitMessage).toBeInTheDocument();
+    });
     expect(container).toMatchSnapshot();
   });
 });
