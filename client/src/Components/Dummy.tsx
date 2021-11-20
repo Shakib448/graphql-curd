@@ -3,8 +3,7 @@ import { gql, useMutation } from "@apollo/client";
 export const DELETE_DOG_MUTATION = gql`
   mutation deleteDog($name: String!, $breed: String!) {
     deleteDog(name: $name, breed: $breed) {
-      name
-      breed
+      message
     }
   }
 `;
@@ -17,9 +16,7 @@ export function DeleteButton() {
   if (data) return <p>Success!</p>;
 
   return (
-    <button
-      onClick={() => mutate({ variables: { name: "Buck", breed: "Breed" } })}
-    >
+    <button onClick={() => mutate({ variables: { name: "", breed: "" } })}>
       Update password
     </button>
   );
