@@ -1,10 +1,12 @@
+/* eslint-disable jest/no-identical-title */
 /* eslint-disable testing-library/no-wait-for-snapshot */
 /* eslint-disable testing-library/await-async-query */
-import { render, waitFor } from "@testing-library/react";
+import { render, screen, waitFor } from "@testing-library/react";
 import { MockedProvider } from "@apollo/client/testing";
-import { UPDATE_PASSWORD } from "../../Graphql/Mutation";
+import { DELETE_USER, UPDATE_PASSWORD } from "../../Graphql/Mutation";
 import userEvent from "@testing-library/user-event";
 import UpdatePassword from "../UpdatePassword";
+import { DeleteButton, DELETE_DOG_MUTATION } from "../Dummy";
 
 describe("Testing with renders", () => {
   it("renders with loading", () => {
@@ -25,37 +27,70 @@ describe("Testing with renders", () => {
     expect(container).toMatchSnapshot();
   });
 
+  // it("should updated the password with success message", async () => {
+  //   const updatePassword = { message: "Successfully updated!" };
+  //   const updateUser: any = {
+  //     request: {
+  //       query: UPDATE_PASSWORD,
+  //       variables: {
+  //         username: "username",
+  //         oldPassword: "oldPassword",
+  //         newPassword: "newPassword",
+  //       },
+  //     },
+  //     result: {
+  //       data: {
+  //         updatePassword,
+  //       },
+  //     },
+  //   };
+
+  //   const { container, getByRole, getByText } = render(
+  //     <MockedProvider mocks={[updateUser]} addTypename={false}>
+  //       <UpdatePassword />
+  //     </MockedProvider>
+  //   );
+
+  //   const button = getByRole("button", { name: /update password/i });
+  //   userEvent.click(button);
+
+  //   await waitFor(async () => {
+  //     const successSubmitMessage = getByText(/Successfully submitted!/i);
+  //     expect(successSubmitMessage).toBeInTheDocument();
+  //     expect(container).toMatchSnapshot();
+  //   });
+  // });
+
   it("should delete with success message", async () => {
-    const updateMessage = { message: "Successfully Delete" };
-    const updateUser: any = {
+    const deleteUser = { message: "Successfully Delete" };
+    const deleteMockUser: any = {
       request: {
-        query: UPDATE_PASSWORD,
+        query: DELETE_DOG_MUTATION,
         variables: {
-          username: "shakib",
-          oldPassword: "muktadir",
-          newPassword: "123456",
+          name: "Buck",
+          breed: "Breed",
         },
       },
       result: {
         data: {
-          updateMessage,
+          deleteUser,
         },
       },
     };
 
-    const { container, getByRole, getByText } = render(
-      <MockedProvider mocks={[updateUser]} addTypename={false}>
-        <UpdatePassword />
+    render(
+      <MockedProvider mocks={[deleteMockUser]} addTypename={false}>
+        <DeleteButton />
       </MockedProvider>
     );
 
-    // const button = getByRole("button", { name: /update password/i });
-    // userEvent.click(button);
+    const button = screen.getByRole("button", { name: /update password/i });
+    userEvent.click(button);
 
-    // await waitFor(async () => {
-    //     const successSubmitMessage = getByText(/Successfully submitted!/i);
-    //     expect(successSubmitMessage).toBeInTheDocument();
-    // });
-    expect(container).toMatchSnapshot();
+    await waitFor(async () => {
+      const successDeleteMessage = screen.getByText(/Success!/i);
+      expect(successDeleteMessage).toBeInTheDocument();
+      expect(successDeleteMessage).toMatchSnapshot();
+    });
   });
 });
