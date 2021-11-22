@@ -63,4 +63,26 @@ describe("Testing the queries", () => {
 
     expect(res.body.data.getAllUsers.length).toEqual(1);
   });
+
+  it("delete users", async () => {
+    const req = request.post("/graphql").send({
+      query: "query { getAllUsers{id, name, username, password} }",
+    });
+
+    const res = await req;
+
+    const deleteID = res.body.data.getAllUsers.map((item: any) => item.id);
+
+    const deleteReq = request.post("/graphql").send({
+      query: `mutation { deleteUser(id : "${deleteID[0]}"){message} }`,
+    });
+
+    const deleteRes = await deleteReq;
+
+    expect(deleteRes.body.data.deleteUser.message).toBe(
+      "Successfully deleted the user!"
+    );
+
+    expect(deleteRes.statusCode).toBe(200);
+  });
 });
